@@ -3,7 +3,7 @@
 include('inc/connection.php');
 require('inc/functions.php');
 
-$pageTitle = "Project | Journal";
+$pageTitle = "New Entry";
 $page = "Journal_Entries";
 
 //$title = $date = $time_spent = $learned = $resources;
@@ -18,15 +18,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($resources)) {
         $error_message = 'Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned, Resources-To-Remember';
     } else {
-          echo "title = $title<br />";
+          if (add_journal($title, $date, $time_spent, $learned, $resources)){
+              header ('Location: index.php');
+              exit;
+          /*echo "title = $title<br />";
           echo "date = $date<br />";
           echo "time-spent = $time_spent<br />";
           echo "what-i-learned = $learned<br />";
-          echo "resources-to-remember = $resources<br />";
-    }
-
+          echo "resources-to-remember = $resources<br />";*/
+          } else {
+                $error_message = 'Could not add entry';
+            }
+       }
 }
-
 
 include('inc/header.php');
 ?>
