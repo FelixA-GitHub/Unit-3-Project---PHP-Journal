@@ -13,21 +13,24 @@ function get_journal_entries(){
     }
 
 }
-/*list entry details
-function get_entry_details(){
+
+//List journal details and include link to edit entry
+function journal_details($journal_id){
     include 'connection.php';
 
-    $sql = 'SELECT details.*, entries.title as entry FROM details'
-         . ' JOIN entries ON details.id = entries.id';
+    $sql = 'SELECT * FROM entries WHERE id = ?';
 
     try{
-        return $db->query($sql);
-    } catch(Exception $e) {
-        echo "Error!: ".$e->getMessage()."</br>";
-        return array();
+        $results = $db->prepare($sql);
+        $results->bindValue(1,$journal_id,PDO::PARAM_INT);
+        $results->execute();
+    } catch(Exception $e){
+        echo "Error!: ".$e->getMessage(). "<br />n";
+        return false;
     }
 
-}*/
+    return $results->fetch();
+}
 
 //add or edit journal entries to journal entry page
 function add_journal($title, $date, $time_spent, $learned, $resources){
@@ -55,23 +58,6 @@ function add_journal($title, $date, $time_spent, $learned, $resources){
     return true; //$results->fetch();
 }
 
-/*how journal details and include link to edit entry
-function journal_details($journal_id){
-    include 'connection.php';
-
-    $sql = 'SELECT * FROM entries WHERE id = ?';
-
-    try{
-        $results = $db->prepare($sql);
-        $results->bindValue(1,$journal_id,PDO::PARAM_INT);
-        $results->execute();
-    } catch(Exception $e){
-        echo "Error!: ".$e->getMessage(). "<br />n";
-        return false;
-    }
-
-    return $results->fetch();
-}*/
 
 //delete entries from journal
 function delete_entries($journal_id){

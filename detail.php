@@ -4,7 +4,10 @@ include('inc/connection.php');
 include('inc/header.php');
 include('inc/functions.php');
 
-
+if(!isset($_GET["id"])){
+    $journal_id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+    $item = get_journal_entries($journal_id);
+}
 
 
 
@@ -19,8 +22,8 @@ include('inc/functions.php');
             <div class="container">
                 <div class="entry-list single">
                     <article>
-                        <h1>The best day I’ve ever had</h1>
-                        <time datetime="2016-01-31">January 31, 2016</time>
+                        <h1><?php echo $item['title']; ?></h1>
+                        <time datetime="<?php echo $item["date"]; ?>">January 31, 2016</time>
                         <div class="entry">
                             <h3>Time Spent: </h3>
                             <p>15 Hours</p>
