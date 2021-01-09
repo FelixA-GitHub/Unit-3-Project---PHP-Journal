@@ -2,7 +2,7 @@
 
 include('inc/connection.php');
 include('inc/header.php');
-require('inc/functions.php');
+include('inc/functions.php');
 
 
 
@@ -19,7 +19,7 @@ require('inc/functions.php');
                           <?php
                            foreach(get_journal_entries() as $item){
                                 echo "<article>";
-                                echo "<h2><a href='detail.php?id=" . "'>" . $item["title"] . "</a></h2>";
+                                echo "<h2><a href='detail.php?id=" . $item["id"] . "'>" . $item["title"] . "</a></h2>";
                                 echo "<time datetime='" . $item["date"] ."'>" . "</time>";
                                 echo "</article>";
                             }

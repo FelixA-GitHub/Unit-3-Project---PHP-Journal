@@ -3,7 +3,7 @@
 $journal_id = "";
 //list journal entries and include link to add entry
 function get_journal_entries(){
-    include 'connection.php';
+    include ('connection.php');
 
     try{
         return $db->query("SELECT id, title, date FROM entries ORDER BY date DESC");
@@ -16,7 +16,7 @@ function get_journal_entries(){
 
 //List journal details and include link to edit entry
 function journal_details($journal_id){
-    include 'connection.php';
+    include ('connection.php');
 
     $sql = 'SELECT * FROM entries WHERE id = ?';
 
@@ -34,7 +34,7 @@ function journal_details($journal_id){
 
 //add or edit journal entries to journal entry page
 function add_journal($title, $date, $time_spent, $learned, $resources){
-    include 'connection.php';
+    include ('connection.php');
 
     if($journal_id){
        $sql = 'UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? WHERE id = ?';
@@ -61,7 +61,7 @@ function add_journal($title, $date, $time_spent, $learned, $resources){
 
 //delete entries from journal
 function delete_entries($journal_id){
-    include 'connection.php';
+    include ('connection.php');
 
     $sql = 'DELETE * FROM entries WHERE id = ?';
 
