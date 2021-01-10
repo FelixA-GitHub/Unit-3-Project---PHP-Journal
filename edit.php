@@ -12,23 +12,31 @@ if(isset($_GET["id"])){
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $journal_id = trim(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING));
+    $journal_id = trim(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_INT));
     $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
     $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
-    $time_spent = trim(filter_input(INPUT_POST, 'time-spent', FILTER_SANITIZE_STRING));
-    $learned = trim(filter_input(INPUT_POST, 'what-i-learned', FILTER_SANITIZE_STRING));
-    $resources = trim(filter_input(INPUT_POST, 'resources-to-remember', FILTER_SANITIZE_STRING));
+    $time_spent = trim(filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING));
+    $learned = trim(filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING));
+    $resources = trim(filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING));
+
+    $dateMatch = explode('/',$date);
 
     if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($resources)) {
         $error_message = 'Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned, Resources-To-Remember';
-    } else {
+    }/* elseif (count($dateMatch) != 3
+             || strlen($dateMatch[0]) != 2
+             || strlen($dateMatch[1]) != 2
+             || strlen($dateMatch[2]) != 4
+             || !checkdate($dateMatch[0],$dateMatch[1],$dateMatch[2])) {
+          $error_message = 'Invalid Date';
+    }*/ else {
           if (add_journal($journal_id, $title, $date, $time_spent, $learned, $resources)){
               header("Location: detail.php?id=" . $journal_id);
               exit;
-              } else {
-                    $error_message = 'Could not add entry';
-                }
-       }
+           } else {
+                 $error_message = 'Could not add entry';
+           }
+    }
 }
 
 
@@ -43,18 +51,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="container">
                 <div class="edit-entry">
                     <h2>Edit Entry</h2>
-                    <form method="post">
+                    <form method="post" action="detail.php">
 
-                        <label for="title">Title<span class="select">*</span></label>
-                        <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title) ?>" /><br>
+                        <label for="title">Title<span class="required">*</span></label>
+                        <select id="title" type="text" name="title">
+                            <option value=""><?php echo htmlspecialchars($title) ?></option><br>
+                            <?php
+                            foreach (get_journal_entries() as $item) {
+                                    echo "<option value='" . $item["id"] . "'>"
+                                        . $item["title"] . "</option>";
+                            }
+                            ?>
+                        </select>
                         <label for="date">Date<span class="required">*</span></label>
                         <input id="date" type="date" name="date" value="<?php echo htmlspecialchars($date) ?>" /><br>
-                        <label for="time-spent">Time Spent<span class="required">*</span></label>
-                        <input id="time-spent" type="text" name="timeSpent" value="<?php echo htmlspecialchars($time_spent) ?>" /><br>
-                        <label for="what-i-learned">What I Learned<span class="required">*</span></label>
-                        <textarea id="what-i-learned" rows="5" name="whatILearned" value="<?php echo htmlspecialchars($learned) ?>"></textarea>
-                        <label for="resources-to-remember">Resources to Remember<span class="required">*</span></label>
-                        <textarea id="resources-to-remember" rows="5" name="ResourcesToRemember" value"<?php echo htmlspecialchars($resources) ?>"></textarea>
+                        <label for="time_spent">Time Spent<span class="required">*</span></label>
+                        <input id="time_spent" type="text" name="time_spent" value="<?php echo htmlspecialchars($time_spent) ?>" /><br>
+                        <label for="learned">What I Learned<span class="required">*</span></label>
+                        <textarea id="learned" rows="5" name="learned" value="<?php echo htmlspecialchars($learned) ?>"></textarea>
+                        <label for="resources">Resources to Remember<span class="required">*</span></label>
+                        <textarea id="resources" rows="5" name="resources" value"<?php echo htmlspecialchars($resources) ?>"></textarea>
                         <input type="submit" value="Publish Entry" class="button">
                         <a href="<?php echo 'detail.php?=' .$journal_id; ?>" class="button button-secondary">Cancel</a>
                     </form>
