@@ -8,7 +8,7 @@ $title = $date = $time_spent = $learned = $resources = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
-    $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
+    $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_NUMBER_INT));
     $time_spent = trim(filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING));
     $learned = trim(filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING));
     $resources = trim(filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING));
@@ -47,11 +47,10 @@ include('inc/header.php');
                     <h2>New Entry</h2>
                     <?php
                     if (isset($error_message)) {
-                        echo "<p class='message'>$error_message</p>";
+                        echo "<p class='error_message'>" . $error_message . "</p>";
                     }
                     ?>
                     <form method="post">
-
                         <label for="title">Title<span class="required">*</span></label>
                         <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title) ?>" /><br>
                         <label for="date">Date<span class="required">*</span></label>

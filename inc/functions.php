@@ -1,6 +1,6 @@
 <?php
 
-$journal_id = "";
+
 //list journal entries and include link to add entry
 function get_journal_entries(){
     include ('connection.php');
@@ -33,7 +33,7 @@ function journal_details($journal_id){
 }
 
 //add or edit journal entries to journal entry page
-function add_journal($title, $date, $time_spent, $learned, $resources, $journal_id = null){
+function add_journal($title, $date, $time_spent, $learned, $resources = null, $journal_id = null){
     include ('connection.php');
 
     if($journal_id){
@@ -50,7 +50,7 @@ function add_journal($title, $date, $time_spent, $learned, $resources, $journal_
         $results->bindValue(4, $learned, PDO::PARAM_STR);
         $results->bindValue(5, $resources, PDO::PARAM_STR);
         if ($journal_id) {
-           $results->bindValue(6, $resources, PDO::PARAM_STR);
+           $results->bindValue(6, $resources, PDO::PARAM_INT);
         }
         $results->execute();
 

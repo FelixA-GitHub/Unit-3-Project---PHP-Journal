@@ -36,17 +36,25 @@ if(isset($_GET["id"])){
                         <div class="entry">
                             <h3>Resources to Remember:</h3>
                             <ul>
-                                <li><a href="">Lorem ipsum dolor sit amet</a></li>
-                                <li><a href="">Cras accumsan cursus ante, non dapibus tempor</a></li>
-                                <li><a href="">Nunc ut rhoncus felis, vel tincidunt neque</a></li>
-                                <li><a href="">Ipsum dolor sit amet</a></li>
+                                <?php
+                                if ($item["resources"] == null) {
+                                    echo "No resources available.";
+                                } else {
+                                    $resources = explode(",", $item["resources"]);
+                                    foreach ($resources as $resource) {
+                                        echo "<li><a href='detail.php'>" . $resource . "</a></li>";
+                                    }
+                                }
+                                ?>
                             </ul>
                         </div>
                     </article>
                 </div>
             </div>
             <div class="edit">
-                <p><a href="<?php echo 'edit.php'; ?>">Edit Entry</a></p>
+                <?php
+                echo "<p><a href='edit.php?id=" . $item["id"] . "'>Edit Entry</a></p>"
+                ?>
             </div>
         </section>
 

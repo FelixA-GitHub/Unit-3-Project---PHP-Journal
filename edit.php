@@ -12,14 +12,14 @@ if(isset($_GET["id"])){
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $journal_id = trim(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_INT));
+    $journal_id = trim(filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT));
     $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
-    $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
+    $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_NUMBER_INT));
     $time_spent = trim(filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING));
     $learned = trim(filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING));
     $resources = trim(filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING));
 
-    $dateMatch = explode('/',$date);
+    $dateMatch = explode('/', $date);
 
     if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($resources)) {
         $error_message = 'Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned, Resources-To-Remember';
@@ -39,6 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+/*
+<select id="title" type="text" name="title">
+      <option value=""><?php echo htmlspecialchars($title) ?></option><br>
+      <?php
+      foreach (get_journal_entries() as $item) {
+              echo "<option value='" . $item["id"] . "'>"
+                  . $item["title"] . "</option>";
+      }
+      ?>
+</select>
+*/
 
 ?>
 
@@ -51,18 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="container">
                 <div class="edit-entry">
                     <h2>Edit Entry</h2>
-                    <form method="post" action="detail.php">
+                    <form method="post">
 
                         <label for="title">Title<span class="required">*</span></label>
-                        <select id="title" type="text" name="title">
-                            <option value=""><?php echo htmlspecialchars($title) ?></option><br>
-                            <?php
-                            foreach (get_journal_entries() as $item) {
-                                    echo "<option value='" . $item["id"] . "'>"
-                                        . $item["title"] . "</option>";
-                            }
-                            ?>
-                        </select>
+                        <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title) ?>" /><br>
                         <label for="date">Date<span class="required">*</span></label>
                         <input id="date" type="date" name="date" value="<?php echo htmlspecialchars($date) ?>" /><br>
                         <label for="time_spent">Time Spent<span class="required">*</span></label>
@@ -72,6 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="resources">Resources to Remember<span class="required">*</span></label>
                         <textarea id="resources" rows="5" name="resources" value"<?php echo htmlspecialchars($resources) ?>"></textarea>
                         <input type="submit" value="Publish Entry" class="button">
+                        <?php
+                        if(!empty($journal_id)) {
+                            echo "<input type='hidden' name='id' value='" . $journal_id . "' />";
+                        }
+                        ?>
                         <a href="<?php echo 'detail.php?=' .$journal_id; ?>" class="button button-secondary">Cancel</a>
                     </form>
                 </div>
