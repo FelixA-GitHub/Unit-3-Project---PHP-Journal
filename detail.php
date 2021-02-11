@@ -42,7 +42,7 @@ if(isset($_GET["id"])){
                                 } else {
                                     $resources = explode(",", $item["resources"]);
                                     foreach ($resources as $resource) {
-                                        echo "<li><a href='detail.php'>" . $resource . "</a></li>";
+                                        echo "<li><a href=''>" . $resource . "</a></li>";
                                     }
                                 }
                                 ?>
@@ -53,7 +53,7 @@ if(isset($_GET["id"])){
             </div>
             <div class="edit">
                 <?php
-                echo "<p><a href='edit.php?id=" . $item["id"] . "'>Edit Entry</a></p>"
+                echo "<p><a href='edit.php?id=" . $item["id"] . "'>Edit Entry</a></p>";
                 ?>
             </div>
         </section>

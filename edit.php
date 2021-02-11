@@ -69,15 +69,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <form method="post">
 
                         <label for="title">Title</label>
-                        <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title) ?>" /><br>
+                        <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" /><br>
                         <label for="date">Date</label>
-                        <input id="date" type="date" name="date" value="<?php echo htmlspecialchars($date) ?>" /><br>
+                        <input id="date" type="date" name="date" value="<?php echo htmlspecialchars($date); ?>" /><br>
                         <label for="time_spent">Time Spent</label>
-                        <input id="time_spent" type="text" name="time_spent" value="<?php echo htmlspecialchars($time_spent) ?>" /><br>
+                        <input id="time_spent" type="text" name="time_spent" value="<?php echo htmlspecialchars($time_spent); ?>" /><br>
                         <label for="learned">What I Learned</label>
-                        <textarea id="learned" rows="5" name="learned" value="<?php echo htmlspecialchars($learned) ?>"></textarea>
+                        <textarea id="learned" rows="5" name="learned" value="<?php echo htmlspecialchars($learned); ?>"></textarea>
                         <label for="resources">Resources to Remember</label>
-                        <textarea id="resources" rows="5" name="resources" value"<?php echo htmlspecialchars($resources) ?>"></textarea>
+                        <textarea id="resources" rows="5" name="resources" value="<?php echo htmlspecialchars($resources); ?>"></textarea>
 
                         <?php
                         if(!empty($journal_id)) {
