@@ -19,22 +19,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $learned = trim(filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING));
     $resources = trim(filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING));
 
-    $dateMatch = explode('/', $date);
+    $dateMatch = explode('-', $date);
 
     if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($resources)) {
-        $error_message = 'Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned, Resources-To-Remember';
-    }/* elseif (count($dateMatch) != 3
-             || strlen($dateMatch[0]) != 2
+        $error_message = "Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned, Resources-To-Remember";
+    } elseif (count($dateMatch) != 3
+             || strlen($dateMatch[0]) != 4
              || strlen($dateMatch[1]) != 2
-             || strlen($dateMatch[2]) != 4
-             || !checkdate($dateMatch[0],$dateMatch[1],$dateMatch[2])) {
-          $error_message = 'Invalid Date';
-    }*/ else {
+             || strlen($dateMatch[2]) != 2
+             || !checkdate($dateMatch[2],$dateMatch[1],$dateMatch[0])) {
+          $error_message = "Invalid Date";
+    } else {
           if (add_journal($journal_id, $title, $date, $time_spent, $learned, $resources)){
-              header("Location: detail.php?id=" . $journal_id);
+              header("Location: detail.php?id=" .$journal_id);
               exit;
            } else {
-                 $error_message = 'Could not add entry';
+                 $error_message = "Could not add entry";
            }
     }
 }
@@ -61,25 +61,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <section>
             <div class="container">
                 <div class="edit-entry">
+                    <?php if(isset($error_message)) {
+                              echo "<p class='error-msg'>" . $error_message . "</p><br>\n";
+                          }
+                    ?>
                     <h2>Edit Entry</h2>
                     <form method="post">
 
-                        <label for="title">Title<span class="required">*</span></label>
+                        <label for="title">Title</label>
                         <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title) ?>" /><br>
-                        <label for="date">Date<span class="required">*</span></label>
+                        <label for="date">Date</label>
                         <input id="date" type="date" name="date" value="<?php echo htmlspecialchars($date) ?>" /><br>
-                        <label for="time_spent">Time Spent<span class="required">*</span></label>
+                        <label for="time_spent">Time Spent</label>
                         <input id="time_spent" type="text" name="time_spent" value="<?php echo htmlspecialchars($time_spent) ?>" /><br>
-                        <label for="learned">What I Learned<span class="required">*</span></label>
+                        <label for="learned">What I Learned</label>
                         <textarea id="learned" rows="5" name="learned" value="<?php echo htmlspecialchars($learned) ?>"></textarea>
-                        <label for="resources">Resources to Remember<span class="required">*</span></label>
+                        <label for="resources">Resources to Remember</label>
                         <textarea id="resources" rows="5" name="resources" value"<?php echo htmlspecialchars($resources) ?>"></textarea>
-                        <input type="submit" value="Publish Entry" class="button">
+
                         <?php
                         if(!empty($journal_id)) {
                             echo "<input type='hidden' name='id' value='" . $journal_id . "' />";
                         }
                         ?>
+                        <input type="submit" value="Publish Entry" class="button">
                         <a href="<?php echo 'detail.php?=' .$journal_id; ?>" class="button button-secondary">Cancel</a>
                     </form>
                 </div>
