@@ -75,9 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="time_spent">Time Spent</label>
                         <input id="time_spent" type="text" name="time_spent" value="<?php echo htmlspecialchars($time_spent); ?>" /><br>
                         <label for="learned">What I Learned</label>
-                        <textarea id="learned" rows="5" name="learned" value=""><?php echo htmlspecialchars($learned); ?></textarea>
+                        <textarea id="learned" rows="5" name="learned"><?php echo htmlspecialchars($learned); ?></textarea>
                         <label for="resources">Resources to Remember</label>
-                        <textarea id="learned" rows="5" name="learned" value=""><?php echo htmlspecialchars($learned); ?></textarea>
+                        <textarea id="learned" rows="5" name="learned"><?php echo htmlspecialchars($learned); ?></textarea>
 
                         <?php
                         if(!empty($journal_id)) {

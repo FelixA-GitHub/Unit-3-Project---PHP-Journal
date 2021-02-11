@@ -50,7 +50,7 @@ function add_journal($title, $date, $time_spent, $learned, $resources = null, $j
         $results->bindValue(4, $learned, PDO::PARAM_STR);
         $results->bindValue(5, $resources, PDO::PARAM_STR);
         if ($journal_id) {
-           $results->bindValue(6, $resources, PDO::PARAM_INT);
+           $results->bindValue(6, $journal_id, PDO::PARAM_INT);
         }
         $results->execute();
 

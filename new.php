@@ -58,9 +58,9 @@ include('inc/header.php');
                         <label for="time_spent">Time Spent</label>
                         <input id="time_spent" type="text" name="time_spent" value="<?php echo htmlspecialchars($time_spent); ?>" /><br>
                         <label for="learned">What I Learned</label>
-                        <textarea id="learned" rows="5" name="learned" value="<?php echo htmlspecialchars($learned); ?>"></textarea>
+                        <textarea id="learned" rows="5" name="learned"><?php echo htmlspecialchars($learned); ?></textarea>
                         <label for="resources">Resources to Remember</label>
-                        <textarea id="resources" rows="5" name="resources" value"<?php echo htmlspecialchars($resources); ?>"></textarea>
+                        <textarea id="learned" rows="5" name="learned"><?php echo htmlspecialchars($learned); ?></textarea>
                         <input type="submit" value="Publish Entry" class="button">
                         <a href="<?php echo 'index.php'; ?>" class="button button-secondary">Cancel</a>
                     </form>
