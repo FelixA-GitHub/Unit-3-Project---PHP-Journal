@@ -4,6 +4,8 @@ include('inc/connection.php');
 include('inc/header.php');
 include('inc/functions.php');
 
+error_reporting(E_ALL ^ E_WARNING);
+
 if (isset($_POST['delete'])) {
     if (delete_entries(filter_input(INPUT_POST, 'delete', FILTER_SANITIZE_NUMBER_INT))) {
         header ("Location: index.php?msg=Entries+Deleted");

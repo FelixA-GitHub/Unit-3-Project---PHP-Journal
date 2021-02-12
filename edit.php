@@ -4,6 +4,8 @@ include('inc/connection.php');
 include('inc/header.php');
 include('inc/functions.php');
 
+error_reporting(E_ALL ^ E_WARNING);
+
 $title = $date = $time_spent = $learned = $resources = '';
 
 if(isset($_GET["id"])){
