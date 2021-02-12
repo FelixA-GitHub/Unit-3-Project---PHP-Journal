@@ -8,7 +8,7 @@ function get_journal_entries(){
     try{
         return $db->query("SELECT id, title, date FROM entries ORDER BY date DESC");
     } catch(Exception $e) {
-        echo "Error!: ".$e->getMessage()."</br>";
+        echo "Error!: ".$e->getMessage();
         return array();
     }
 
@@ -25,7 +25,7 @@ function journal_details($journal_id){
         $results->bindValue(1,$journal_id,PDO::PARAM_INT);
         $results->execute();
     } catch(Exception $e){
-        echo "Error!: ".$e->getMessage(). "<br />n";
+        echo "Error!: ".$e->getMessage();
         return false;
     }
 
@@ -66,14 +66,14 @@ function add_journal($title, $date, $time_spent, $learned, $resources = null, $j
 function delete_entries($journal_id){
     include ('connection.php');
 
-    $sql = 'DELETE * FROM entries WHERE id = ?';
+    $sql = 'DELETE FROM entries WHERE id = ?';
 
     try{
         $results = $db->prepare($sql);
         $results->bindValue(1,$journal_id,PDO::PARAM_INT);
         $results->execute();
     } catch(Exception $e){
-        echo "Error!: ".$e->getMessage(). "<br />n"; //check on this /br
+        echo "Error!: ".$e->getMessage(); //check on this /br
         return false;
     }
 

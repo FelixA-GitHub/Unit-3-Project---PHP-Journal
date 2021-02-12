@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           }
                     ?>
                     <h2>Edit Entry</h2>
-                    <form method="post">
+                    <form method="POST">
 
                         <label for="title">Title</label>
                         <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" /><br>
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label for="learned">What I Learned</label>
                         <textarea id="learned" rows="5" name="learned"><?php echo htmlspecialchars($learned); ?></textarea>
                         <label for="resources">Resources to Remember</label>
-                        <textarea id="learned" rows="5" name="learned"><?php echo htmlspecialchars($learned); ?></textarea>
+                        <textarea id="resources" rows="5" name="resources"><?php echo htmlspecialchars($resources); ?></textarea>
 
                         <?php
                         if(!empty($journal_id)) {

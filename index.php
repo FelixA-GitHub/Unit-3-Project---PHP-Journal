@@ -27,7 +27,10 @@ if (isset($_GET['msg'])) {
           <section>
               <div class="container">
                   <div class="entry-list">
-
+                  <?php if(isset($error_message)) {
+                            echo "<p class='error-msg'>" .$error_message. "</p><br>\n";
+                  }
+                  ?>
                           <?php
                            foreach(get_journal_entries() as $item){
                                 echo "<article>";
