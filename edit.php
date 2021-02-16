@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dateMatch = explode('-', $date);
 
     if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($resources)) {
-        $error_message = "Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned, Resources-To-Remember";
+        $error_message = "Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned";
     } elseif (count($dateMatch) != 3
              || strlen($dateMatch[0]) != 4
              || strlen($dateMatch[1]) != 2

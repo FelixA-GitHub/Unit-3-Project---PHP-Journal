@@ -37,9 +37,9 @@ function add_journal($title, $date, $time_spent, $learned, $resources = null, $j
     include ('connection.php');
 
     if($journal_id){
-       $sql = 'UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? WHERE id = ?';
+        $sql = 'UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? WHERE id = ?';
     } else {
-        $sql = 'INSERT INTO entries(title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO entries (title, date, time_spent, learned, resources) VALUES (?, ?, ?, ?, ?)';
     }
 
     try{
@@ -58,7 +58,7 @@ function add_journal($title, $date, $time_spent, $learned, $resources = null, $j
         echo "Error!: " .$e->getMessage(). "<br />\n";
         return false;
     }
-    return true; //$results->fetch();
+    return $results->fetch();
 }
 
 
