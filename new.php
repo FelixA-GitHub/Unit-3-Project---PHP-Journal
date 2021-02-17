@@ -45,11 +45,11 @@ include('inc/header.php');
             <div class="container">
                 <div class="new-entry">
                     <h2>New Entry</h2>
-                    <!--<?php
-                    if (isset($error_message)) {
-                        echo "<p class='error_message'>" . $error_message . "</p>";
-                    }
-                    ?>-->
+                    <?php
+                    //if (isset($error_message)) {
+                        //echo "<p class='error_message'>" . $error_message . "</p>";
+                    //}
+                    ?>
                     <form method="POST">
                         <label for="title">Title</label>
                         <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" /><br>

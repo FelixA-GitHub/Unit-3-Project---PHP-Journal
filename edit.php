@@ -63,10 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <section>
             <div class="container">
                 <div class="edit-entry">
-                    <!--<?php if(isset($error_message)) {
-                              echo "<p class='error-msg'>" . $error_message . "</p><br>\n";
-                          }
-                    ?>-->
+                    <?php //if(isset($error_message)) {
+                          //    echo "<p class='error-msg'>" . $error_message . "</p><br>\n";
+                          //}
+                    ?>
                     <h2>Edit Entry</h2>
                     <form method="POST">
 
