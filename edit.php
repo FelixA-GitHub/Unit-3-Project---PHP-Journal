@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              || !checkdate($dateMatch[2],$dateMatch[1],$dateMatch[0])) {
           $error_message = "Invalid Date";
     } else {
-          if (add_journal($journal_id, $title, $date, $time_spent, $learned, $resources)){
+          if (add_journal($title, $date, $time_spent, $learned, $resources, $journal_id)){
               header("Location: detail.php?id=" .$journal_id);
               exit;
            } else {
@@ -63,10 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <section>
             <div class="container">
                 <div class="edit-entry">
-                    <?php if(isset($error_message)) {
+                    <!--<?php if(isset($error_message)) {
                               echo "<p class='error-msg'>" . $error_message . "</p><br>\n";
                           }
-                    ?>
+                    ?>-->
                     <h2>Edit Entry</h2>
                     <form method="POST">
 
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             echo "<input type='hidden' name='id' value='" . $journal_id . "' />";
                         }
                         ?>
-                        <input type="submit" value="Publish Entry" class="button">
+                        <input type="submit" value="Publish Entry" class="button button-primary">
                         <a href="<?php echo 'detail.php?id=' .$journal_id; ?>" class="button button-secondary">Cancel</a>
                     </form>
                 </div>
