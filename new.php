@@ -17,21 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($resources)) {
         $error_message = 'Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned, Resources-To-Remember';
-    } elseif (count($dateMatch) != 3
-             || strlen($dateMatch[0]) != 4
-             || strlen($dateMatch[1]) != 2
-             || strlen($dateMatch[2]) != 2
-             || !checkdate($dateMatch[2],$dateMatch[1],$dateMatch[0])) {
-          $error_message = 'Invalid Date';
-
     } else {
-          if (add_journal($title, $date, $time_spent, $learned, $resources)){
+          add_journal($title, $date, $time_spent, $learned, $resources);
               header("Location: index.php");
-              exit;
-          } else {
-              $error_message = 'Could not add entry';
-          }
     }
+    $error_message = 'Could not add entry';
 }
 
 include('inc/header.php');
@@ -46,9 +36,9 @@ include('inc/header.php');
                 <div class="new-entry">
                     <h2>New Entry</h2>
                     <?php
-                    //if (isset($error_message)) {
-                        //echo "<p class='error_message'>" . $error_message . "</p>";
-                    //}
+                    if (isset($error_message)) {
+                        echo "<p class='error_message'>" . $error_message . "</p>";
+                    }
                     ?>
                     <form method="POST">
                         <label for="title">Title</label>

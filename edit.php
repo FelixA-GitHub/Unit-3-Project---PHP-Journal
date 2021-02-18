@@ -25,20 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($resources)) {
         $error_message = "Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned";
-    } elseif (count($dateMatch) != 3
-             || strlen($dateMatch[0]) != 4
-             || strlen($dateMatch[1]) != 2
-             || strlen($dateMatch[2]) != 2
-             || !checkdate($dateMatch[2],$dateMatch[1],$dateMatch[0])) {
-          $error_message = "Invalid Date";
     } else {
-          if (add_journal($title, $date, $time_spent, $learned, $resources, $journal_id)){
-              header("Location: detail.php?id=" .$journal_id);
-              exit;
-           } else {
-                 $error_message = "Could not add entry";
-           }
+          add_journal($title, $date, $time_spent, $learned, $resources, $journal_id);
+          header("Location: index.php?id=" .$journal_id);
     }
+    $error_message = "Could not add entry";
 }
 
 /*
@@ -63,9 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <section>
             <div class="container">
                 <div class="edit-entry">
-                    <?php //if(isset($error_message)) {
-                          //    echo "<p class='error-msg'>" . $error_message . "</p><br>\n";
-                          //}
+                    <?php
+                    if(isset($error_message)) {
+                          echo "<p class='error-msg'>" . $error_message . "</p><br>\n";
+                    }
                     ?>
                     <h2>Edit Entry</h2>
                     <form method="POST">
@@ -87,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         }
                         ?>
                         <input type="submit" value="Publish Entry" class="button button-primary">
-                        <a href="<?php echo 'detail.php?id=' .$journal_id; ?>" class="button button-secondary">Cancel</a>
+                        <a href="<?php echo 'index.php'; ?>" class="button button-secondary">Cancel</a>
                     </form>
                 </div>
             </div>
