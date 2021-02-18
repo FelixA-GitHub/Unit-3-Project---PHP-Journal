@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             echo "<input type='hidden' name='id' value='" . $journal_id . "' />";
                         }
                         ?>
-                        <input type="submit" value="Publish Entry" class="button button-primary">
+                        <input type="submit" value="Publish Entry" class="button">
                         <a href="<?php echo 'index.php'; ?>" class="button button-secondary">Cancel</a>
                     </form>
                 </div>
