@@ -5,8 +5,9 @@
    ========================================================================== */
 
 body {
+	background-color: #ebd078;
 	font-size: 16px;
-	color: #eb4034;
+	color: #404a49;
 	font-family: 'Cousine', serif;
 	font-weight: 400;
 }
@@ -98,6 +99,9 @@ h1 {
 }
 h2 {
 	font-size: 32px;
+	font-style: bold;
+	font-family: 'Luminari', fantasy;
+	font-stretch: ultra-expanded;
 }
 h2 a {
 	text-decoration: none;
@@ -197,6 +201,7 @@ form input[type=text],
 form input[type=password],
 form input[type=date],
 form textarea {
+	background-color: #678f89;
 	border: 2px solid #e1e1e1;
 	font-size: 18px;
 	line-height: 1.8em;
@@ -213,9 +218,11 @@ form textarea:focus {
 	border-color: #678f89;
 }
 form input[type=text]:hover,
-form input[type=date]:hover
+form input[type=date]:hover,
 form textarea:hover {
 	border-color: #678f89;
+	background-color: #d4af37;
+	color: #ffffff;
 }
 .edit-entry form textarea,
 .new-entry form textarea {
