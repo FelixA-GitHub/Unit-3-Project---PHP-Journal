@@ -8,7 +8,7 @@ body {
 	background-color: #ebd078;
 	font-size: 16px;
 	color: #404a49;
-	font-family: 'Cousine', serif;
+	font-family: 'Optima', serif;
 	font-weight: 400;
 }
 .container {
@@ -99,8 +99,7 @@ h1 {
 }
 h2 {
 	font-size: 32px;
-	font-style: bold;
-	font-family: 'Luminari', fantasy;
+	font-family: 'Marker Felt', fantasy;
 	font-stretch: ultra-expanded;
 }
 h2 a {
@@ -154,6 +153,11 @@ ul li a {
 .entry-list article {
 	margin-bottom: 70px;
 	text-align: center;
+}
+.entry-list article:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 .entry-list article:last-child {
 	margin-bottom: 0;
