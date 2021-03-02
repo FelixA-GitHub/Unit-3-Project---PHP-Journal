@@ -7,8 +7,8 @@
 body {
 	background-color: #ebd078;
 	font-size: 16px;
-	color: #404a49;
-	font-family: 'Optima', serif;
+	color: #172853;
+	font-family: 'Goudy Old Style', serif;
 	font-weight: 400;
 }
 .container {
@@ -20,10 +20,19 @@ header .site-header {
 	height: 95px;
 }
 header .logo i {
-	color: #678f89;
+	color: #172853;
 	margin: 20px 0 0 -5px;
 	float: left;
 	font-size: 40px;
+	border: 2px solid #172853;
+	border-radius: 4px;
+}
+header .logo i:hover {
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	transform: scale(1.1);
+	background: #d4af37;
+	color: white;
 }
 header .button {
 	float: right;
@@ -43,19 +52,31 @@ footer {
 
 .button {
 	padding: 8px 10px 6px 10px;
-	background: #678f89;
-	border: 2px solid #678f89;
+	background: #172853;
+	border: 2px solid #172853;
 	border-radius: 4px;
 	text-decoration: none;
 	color: #FFF;
 	position: relative;
 	text-align: center;
 	font-size: 14px;
+	font-family: "Big Caslon", serif;
+}
+.button:hover {
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	transform: scale(1.1);
+	background: #d4af37;
 }
 .button.button-secondary {
 	background: #FFF;
-	border: 2px solid #e1e1e1;
-	color: #404a49;
+	border: 2px solid #127db2;
+	color: #127db2;
+}
+.button.button-secondary:hover {
+	transform: scale(1.1);
+	background: red;
+	color: #172853;
 }
 .button.icon-right {
 	padding-right: 30px;
@@ -91,7 +112,7 @@ h3 {
 	margin: 0;
 	font-weight: 400;
 	line-height: 1em;
-	color: #000;
+	color: #127db2;
 }
 h1 {
 	font-size: 44px;
@@ -99,12 +120,11 @@ h1 {
 }
 h2 {
 	font-size: 32px;
-	font-family: 'Marker Felt', fantasy;
 	font-stretch: ultra-expanded;
 }
 h2 a {
 	text-decoration: none;
-	color: #000;
+	color: #127db2;
 }
 h3 {
 	font-size: 18px;
@@ -117,9 +137,9 @@ p {
 	font-size: 18px;
 }
 p a {
-	border-bottom: 2px solid #678f89;
+	border-bottom: 2px solid #172853;
 	padding: 0;
-	color: #678f89;
+	color: #172853;
 	text-decoration: none;
 }
 ul li {
@@ -127,9 +147,9 @@ ul li {
 	font-size: 18px;
 }
 ul li a {
-	border-bottom: 2px solid #678f89;
+	border-bottom: 2px solid #172853;
 	line-height: 1.8em;
-	color: #678f89;
+	color: #172853;
 	text-decoration: none;
 }
 
@@ -159,6 +179,13 @@ ul li a {
 }
 .entry-list article h2 {
 	margin-bottom: 8px;
+	font-family: "Garamond", serif;
+	font-weight: bold;
+}
+.entry-list article h2:hover {
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	transform: scale(1.1);
 }
 .entry-list.single {
 	padding-bottom: 70px;
@@ -200,14 +227,16 @@ form input[type=text],
 form input[type=password],
 form input[type=date],
 form textarea {
-	background-color: #678f89;
-	border: 2px solid #e1e1e1;
+	background-color: #127db2;
+	color: white;
+	border: 2px solid white;
 	font-size: 18px;
 	line-height: 1.8em;
 	padding:10px 13px;
 	margin-bottom: 30px;
 	border-radius: 4px;
 	width: calc(100% - 32px);
+	font-family: "Garamond", serif;
 }
 form input[type=text]:focus,
 form input[type=date]:focus,
@@ -221,7 +250,7 @@ form input[type=date]:hover,
 form textarea:hover {
 	border-color: #678f89;
 	background-color: #d4af37;
-	color: #ffffff;
+	color: #172853;
 }
 .edit-entry form textarea,
 .new-entry form textarea {
