@@ -154,11 +154,6 @@ ul li a {
 	margin-bottom: 70px;
 	text-align: center;
 }
-.entry-list article:hover {
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
-}
 .entry-list article:last-child {
 	margin-bottom: 0;
 }
