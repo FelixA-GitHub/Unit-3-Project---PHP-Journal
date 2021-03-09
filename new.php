@@ -12,13 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $time_spent = trim(filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING));
     $learned = trim(filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING));
     $resources = trim(filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING));
+    $tags = trim(filter_input(INPUT_POST, 'tags', FILTER_SANITIZE_STRING));
 
     $dateMatch = explode('-',$date);
 
-    if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($resources)) {
-        $error_message = 'Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned, Resources-To-Remember';
+    if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
+        $error_message = 'Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned';
     } else {
-          add_journal($title, $date, $time_spent, $learned, $resources);
+          add_journal($title, $date, $time_spent, $learned, $resources, $tags);
               header("Location: index.php");
     }
     $error_message = 'Could not add entry';
@@ -51,6 +52,8 @@ include('inc/header.php');
                         <textarea id="learned" rows="5" name="learned"><?php echo htmlspecialchars($learned); ?></textarea>
                         <label for="resources">Resources to Remember</label>
                         <textarea id="resources" rows="5" name="resources"><?php echo htmlspecialchars($resources); ?></textarea>
+                        <label for="tags">Tags</label>
+                        <input id="tags" type="text" name="tags" value="<?php echo htmlspecialchars($tags); ?>" /><br>
                         <input type="submit" value="Publish Entry" class="button">
                         <a href="<?php echo 'index.php'; ?>" class="button button-secondary">Cancel</a>
                     </form>

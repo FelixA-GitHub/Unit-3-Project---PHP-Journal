@@ -33,13 +33,13 @@ function journal_details($journal_id){
 }
 
 //add or edit journal entries to journal entry page
-function add_journal($title, $date, $time_spent, $learned, $resources = null, $journal_id = null){
+function add_journal($title, $date, $time_spent, $learned, $resources = null, $tags = null, $journal_id = null){
     include ('connection.php');
 
     if($journal_id){
-        $sql = 'UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? WHERE id = ?';
+        $sql = 'UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? tags = ? WHERE id = ?';
     } else {
-        $sql = 'INSERT INTO entries (title, date, time_spent, learned, resources) VALUES (?, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO entries (title, date, time_spent, learned, resources, tags) VALUES (?, ?, ?, ?, ?, ?)';
     }
 
     try{
@@ -49,8 +49,9 @@ function add_journal($title, $date, $time_spent, $learned, $resources = null, $j
         $results->bindValue(3, $time_spent, PDO::PARAM_STR);
         $results->bindValue(4, $learned, PDO::PARAM_STR);
         $results->bindValue(5, $resources, PDO::PARAM_STR);
+        $results->bindValue(6, $tags, PDO::PARAM_STR);
         if ($journal_id) {
-           $results->bindValue(6, $journal_id, PDO::PARAM_INT);
+           $results->bindValue(7, $journal_id, PDO::PARAM_INT);
         }
         $results->execute();
 

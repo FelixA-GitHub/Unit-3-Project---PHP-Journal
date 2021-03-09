@@ -48,6 +48,21 @@ if(isset($_GET["id"])){
                                 ?>
                             </ul>
                         </div>
+                        <div class="entry">
+                            <h3>Tags:</h3>
+                            <ul>
+                                <?php
+                                if ($item["tags"] == null) {
+                                    echo "No tags available.";
+                                } else {
+                                    $tags = explode(",", $item["tags"]);
+                                    foreach ($tags as $tag) {
+                                        echo "<li><a href=''>" . $tag . "</a></li>";
+                                    }
+                                }
+                                ?>
+                            </ul>
+                        </div>
                     </article>
                 </div>
             </div>

@@ -10,7 +10,7 @@ $title = $date = $time_spent = $learned = $resources = '';
 
 if(isset($_GET["id"])){
     $journal_id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-    list($journal_id, $title, $date, $time_spent, $learned, $resources) = journal_details($journal_id);
+    list($journal_id, $title, $date, $time_spent, $learned, $resources, $tags) = journal_details($journal_id);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -20,13 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $time_spent = trim(filter_input(INPUT_POST, 'time_spent', FILTER_SANITIZE_STRING));
     $learned = trim(filter_input(INPUT_POST, 'learned', FILTER_SANITIZE_STRING));
     $resources = trim(filter_input(INPUT_POST, 'resources', FILTER_SANITIZE_STRING));
+    $tags = trim(filter_input(INPUT_POST, 'tags', FILTER_SANITIZE_STRING));
 
     $dateMatch = explode('-', $date);
 
-    if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($resources)) {
+    if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
         $error_message = "Please fill in the required fields: Title, Date, Time-Spent, What-I-Learned";
     } else {
-          add_journal($title, $date, $time_spent, $learned, $resources, $journal_id);
+          add_journal($title, $date, $time_spent, $learned, $resources, $tags, $journal_id);
           header("Location: index.php?id=" .$journal_id);
     }
     $error_message = "Could not add entry";
@@ -60,6 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <textarea id="learned" rows="5" name="learned"><?php echo htmlspecialchars($learned); ?></textarea>
                         <label for="resources">Resources to Remember</label>
                         <textarea id="resources" rows="5" name="resources"><?php echo htmlspecialchars($resources); ?></textarea>
+                        <label for="tags">Tags</label>
+                        <input id="tags" type="text" name="tags" value="<?php echo htmlspecialchars($tags); ?>" /><br>
 
                         <?php
                         if(!empty($journal_id)) {
