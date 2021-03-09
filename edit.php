@@ -6,7 +6,7 @@ include('inc/functions.php');
 
 //error_reporting(E_ALL ^ E_WARNING);
 
-$title = $date = $time_spent = $learned = $resources = '';
+$title = $date = $time_spent = $learned = $resources = $tags = '';
 
 if(isset($_GET["id"])){
     $journal_id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
