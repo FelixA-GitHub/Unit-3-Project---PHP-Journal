@@ -36,9 +36,8 @@ if (isset($_GET['msg'])) {
                           <?php
                            foreach(get_journal_entries() as $item){
                                 echo "<article>";
-                                echo "<h2><a href='detail.php?id=" . $item["id"] . "'>" . $item["title"] . "</a></h2>";
+                                echo "<h2><a href='detail.php?id=" . $item["id"] . "'>" . $item["title"] . </a></h2>";
                                 echo "<time datetime=" . $item["date"] . ">" . date('F d, Y', strtotime($item["date"])) . "</time>";
-                                echo "<h2><a href='detail.php?id=" . $item["id"] . "'>" . $item["tags"] . "</a></h2>";
                                 echo "<form method='post' action='index.php'>";
                                 echo "<input type='hidden' value='" . $item["id"] . "' name='delete' />\n";
                                 echo "<input type='submit' class='button delete journal entry' value='Delete' />\n";
