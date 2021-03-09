@@ -32,18 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $error_message = "Could not add entry";
 }
 
-/*
-<select id="title" type="text" name="title">
-      <option value=""><?php echo htmlspecialchars($title) ?></option><br>
-      <?php
-      foreach (get_journal_entries() as $item) {
-              echo "<option value='" . $item["id"] . "'>"
-                  . $item["title"] . "</option>";
-      }
-      ?>
-</select>
-*/
-
 ?>
 
 <!DOCTYPE html>

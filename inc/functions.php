@@ -1,7 +1,7 @@
 <?php
 
 
-//list journal entries and include link to add entry
+//Pull journal entries from db and list on index page
 function get_journal_entries(){
     include ('connection.php');
 
@@ -62,7 +62,7 @@ function add_journal($title, $date, $time_spent, $learned, $resources = null, $j
 }
 
 
-//delete entries from journal
+//delete entries from journal on index page
 function delete_entries($journal_id){
     include ('connection.php');
 
@@ -73,7 +73,7 @@ function delete_entries($journal_id){
         $results->bindValue(1,$journal_id,PDO::PARAM_INT);
         $results->execute();
     } catch(Exception $e){
-        echo "Error!: ".$e->getMessage(); //check on this /br
+        echo "Error!: ".$e->getMessage();
         return false;
     }
 
