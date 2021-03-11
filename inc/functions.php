@@ -37,7 +37,7 @@ function add_journal($title, $date, $time_spent, $learned, $resources = null, $t
     include ('connection.php');
 
     if($journal_id){
-        $sql = 'UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? tags = ? WHERE id = ?';
+        $sql = 'UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ?, tags = ? WHERE id = ?';
     } else {
         $sql = 'INSERT INTO entries (title, date, time_spent, learned, resources, tags) VALUES (?, ?, ?, ?, ?, ?)';
     }
