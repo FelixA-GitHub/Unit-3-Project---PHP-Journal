@@ -1,12 +1,14 @@
 <?php
 
 
-//Pull journal entries from db and list on index page
+//Pull journal entries and tags from db and list on index page
 function get_journal_entries(){
     include ('connection.php');
 
     try{
-        return $db->query("SELECT id, title, date FROM entries ORDER BY date DESC");
+        return $db->query("SELECT e.id, e.title, e.date, jt.tags FROM entries e
+          LEFT OUTER JOIN journal_tags jt ON jt.tag_id = e.id
+          ORDER BY date DESC");
     } catch(Exception $e) {
         echo "Error!: ".$e->getMessage();
         return array();
