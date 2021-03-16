@@ -16,6 +16,16 @@ if (isset($_POST['delete'])) {
     }
 }
 
+if (isset($_POST['delete'])) {
+    if (delete_tags(filter_input(INPUT_POST, 'delete', FILTER_SANITIZE_NUMBER_INT))) {
+        header ("Location: index.php?msg=Tags+Deleted");
+        exit;
+    } else {
+        header ("Location: index.php?msg=Unable+To+Delete+Tags");
+        exit;
+    }
+}
+
 if (isset($_GET['msg'])) {
     $error_message = trim(filter_input(INPUT_GET, 'msg', FILTER_SANITIZE_STRING));
 }
@@ -44,6 +54,15 @@ if (isset($_GET['msg'])) {
                                 echo "</form>";
                                 echo "</article>";
                             }
+                            foreach(get_tag_list() as $item){
+                                 echo "<article>";
+                                 echo "<h2><a href='detail.php?id=" . $item["tag_id"] . "'>" . $item["tags"] . "</a></h2>";
+                                 echo "<form method='post' action='index.php'>";
+                                 echo "<input type='hidden' value='" . $item["tag_id"] . "' name='delete' />\n";
+                                 echo "<input type='submit' class='button delete journal entry' value='Delete' />\n";
+                                 echo "</form>";
+                                 echo "</article>";
+                             }
                           ?>
                   </div>
               </div>
