@@ -44,25 +44,19 @@ if (isset($_GET['msg'])) {
                   }
                   ?>
                           <?php
-                           foreach(get_journal_entries() as $item){
-                                echo "<article>";
-                                echo "<h2><a href='detail.php?id=" . $item["id"] . "'>" . $item["title"] . "</a></h2>";
-                                echo "<time datetime=" . $item["date"] . ">" . date('F d, Y', strtotime($item["date"])) . "</time>";
-                                echo "<form method='post' action='index.php'>";
-                                echo "<input type='hidden' value='" . $item["id"] . "' name='delete' />\n";
-                                echo "<input type='submit' class='button delete journal entry' value='Delete' />\n";
-                                echo "</form>";
-                                echo "</article>";
+                           foreach(get_journal_entries() as $je){
+                                foreach(get_tag_list() as $tl) {
+                                    echo "<article>";
+                                    echo "<h2><a href='detail.php?id=" . $je["id"] . "'>" . $je["title"] . "</a></h2>";
+                                    echo "<time datetime=" . $je["date"] . ">" . date('F d, Y', strtotime($je["date"])) . "</time>";
+                                    echo "<h2><a href='detail.php?id=" . $tl["tag_id"] . "'>" . $tl["tag_id"] . "</a></h2>";
+                                    echo "<form method='post' action='index.php'>";
+                                    echo "<input type='hidden' value='" . $je["id"] . $tl["tag_id"] . "' name='delete' />\n";
+                                    echo "<input type='submit' class='button delete journal entry' value='Delete' />\n";
+                                    echo "</form>";
+                                    echo "</article>";
+                                }
                             }
-                            foreach(get_tag_list() as $item){
-                                 echo "<article>";
-                                 echo "<h2><a href='detail.php?id=" . $item["tag_id"] . "'>" . $item["tags"] . "</a></h2>";
-                                 echo "<form method='post' action='index.php'>";
-                                 echo "<input type='hidden' value='" . $item["tag_id"] . "' name='delete' />\n";
-                                 echo "<input type='submit' class='button delete journal entry' value='Delete' />\n";
-                                 echo "</form>";
-                                 echo "</article>";
-                             }
                           ?>
                   </div>
               </div>

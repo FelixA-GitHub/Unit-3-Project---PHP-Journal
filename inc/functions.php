@@ -21,7 +21,23 @@ function get_tag_list(){
 
     try{
         return $db->query("SELECT tag_id, tags FROM tag_list
-	                         ORDER BY tag_id DESC");
+	                         ORDER BY tag_id");
+    } catch(Exception $e) {
+        echo "Error!: ".$e->getMessage();
+        return array();
+    }
+
+}
+
+//Pull intersected entries and list on index page
+function get_intersect_list(){
+    include ('connection.php');
+
+    try{
+        return $db->query("SELECT e.id, e.title, e.date, tl.tag_id FROM entries e
+                           INNER JOIN results r ON e.id = r.id
+                           INNER JOIN tag_list tl ON r.tag_id = tl.tag_id
+                           GROUP BY tl.tag_id");
     } catch(Exception $e) {
         echo "Error!: ".$e->getMessage();
         return array();
@@ -118,7 +134,6 @@ function add_tags($tags, $tag_id = null){
     }
     return $results->fetch();
 }
-
 
 //delete entries from journal on index page
 function delete_entries($journal_id){

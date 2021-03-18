@@ -57,7 +57,7 @@ if(isset($_GET["id"])){
                                 } else {
                                     $tags = explode(",", $item["tags"]);
                                     foreach ($tags as $tag) {
-                                        echo "<li><a href=''>" . $tag . "</a></li>";
+                                        echo "<li><a href=''>" . trim($tag) . "</a></li>";
                                     }
                                 }
                                 ?>
