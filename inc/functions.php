@@ -29,15 +29,29 @@ function get_tag_list(){
 
 }
 
+//Pull end_result entries and list on index page
+function get_end_result_list(){
+    include ('connection.php');
+
+    try{
+        return $db->query("SELECT id, tag_id FROM end_result
+	                         ORDER BY id");
+    } catch(Exception $e) {
+        echo "Error!: ".$e->getMessage();
+        return array();
+    }
+
+}
+
 //Pull intersected entries and list on index page
 function get_intersect_list(){
     include ('connection.php');
 
     try{
-        return $db->query("SELECT e.id, e.title, e.date, tl.tag_id FROM entries e
-                           INNER JOIN results r ON e.id = r.id
-                           INNER JOIN tag_list tl ON r.tag_id = tl.tag_id
-                           GROUP BY tl.tag_id");
+       return $db->query("SELECT er.id, tl.tags FROM end_result er
+                          INNER JOIN tag_list tl ON tl.tag_id = er.tag_id
+                          INNER JOIN entries e ON e.id = er.id
+                          GROUP BY er.tag_id");
     } catch(Exception $e) {
         echo "Error!: ".$e->getMessage();
         return array();
@@ -72,6 +86,24 @@ function tag_details($tag_id){
     try{
         $results = $db->prepare($sql);
         $results->bindValue(1,$tag_id,PDO::PARAM_INT);
+        $results->execute();
+    } catch(Exception $e){
+        echo "Error!: ".$e->getMessage();
+        return false;
+    }
+
+    return $results->fetch();
+}
+
+//List end_result details and include link to edit entry
+function end_result_details($end_result){
+    include ('connection.php');
+
+    $sql = 'SELECT * FROM end_result WHERE id = ?';
+
+    try{
+        $results = $db->prepare($sql);
+        $results->bindValue(1,$end_result,PDO::PARAM_INT);
         $results->execute();
     } catch(Exception $e){
         echo "Error!: ".$e->getMessage();
