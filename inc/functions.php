@@ -43,6 +43,27 @@ function get_end_result_list(){
 
 }
 
+// get all tags for an entry
+function get_tags_for_entry($id) {
+    include("connection.php");
+    try {
+      $results = $db->prepare(
+          "SELECT * FROM tag_list
+          JOIN end_result ON tag_list.tag_id = end_result.tag_id
+          JOIN entries ON end_result.id = entries.id
+          WHERE entries.id = ?
+          GROUP BY tag_list.tags"
+      );
+      $results->bindParam(1,$id,PDO::PARAM_INT);
+      $results->execute();
+    } catch (Exception $e) {
+      echo "bad query";
+      echo $e->getMessage();
+    }
+    $tags = $results->fetchAll(PDO::FETCH_ASSOC);
+    return $tags;
+  }
+
 //Pull intersected entries and list on index page
 function get_intersect_list(){
     include ('connection.php');
@@ -78,14 +99,14 @@ function journal_details($journal_id){
 }
 
 //List tag details and include link to edit entry
-function tag_details($tag_id){
+function tag_details($tag_dets){
     include ('connection.php');
 
     $sql = 'SELECT * FROM tag_list WHERE tag_id = ?';
 
     try{
         $results = $db->prepare($sql);
-        $results->bindValue(1,$tag_id,PDO::PARAM_INT);
+        $results->bindValue(1,$tag_dets,PDO::PARAM_INT);
         $results->execute();
     } catch(Exception $e){
         echo "Error!: ".$e->getMessage();
@@ -143,7 +164,7 @@ function add_journal($title, $date, $time_spent, $learned, $resources = null, $j
 }
 
 //add or edit tag entries to journal entry page
-function add_tags($tags, $tag_id = null){
+function add_tags($tags, $tag_dets = null){
     include ('connection.php');
 
     if($tag_id){
@@ -155,8 +176,8 @@ function add_tags($tags, $tag_id = null){
     try{
         $results = $db->prepare($sql);
         $results->bindValue(1, $tags, PDO::PARAM_STR);
-        if ($tag_id) {
-           $results->bindValue(2, $tag_id, PDO::PARAM_INT);
+        if ($tag_dets) {
+           $results->bindValue(2, $tag_dets, PDO::PARAM_INT);
         }
         $results->execute();
 
@@ -186,14 +207,14 @@ function delete_entries($journal_id){
 }
 
 //delete tags from journal on index page
-function delete_tags($tag_id){
+function delete_tags($tag_dets){
     include ('connection.php');
 
     $sql = 'DELETE FROM tag_list WHERE tag_id = ?';
 
     try{
         $results = $db->prepare($sql);
-        $results->bindValue(1,$tag_id,PDO::PARAM_INT);
+        $results->bindValue(1,$tag_dets,PDO::PARAM_INT);
         $results->execute();
     } catch(Exception $e){
         echo "Error!: ".$e->getMessage();

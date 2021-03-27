@@ -45,18 +45,17 @@ if (isset($_GET['msg'])) {
                   ?>
                           <?php
                           foreach(get_journal_entries() as $je){
-                                foreach(get_end_result_list() as $erl){
-                                    echo "<article>";
-                                    echo "<h2><a href='detail.php?id=" . $je["id"] . "'>" . $je["title"] . "</a></h2>";
-                                    echo "<time datetime=" . $je["date"] . ">" . date('F d, Y', strtotime($je["date"])) . "</time>";
-                                    echo "<p><a href='detail.php?id=" . $erl["id"] . "'>" . $erl["id"] . "</a></p>";
-                                    echo "<form method='post' action='index.php'>";
-                                    echo "<input type='hidden' value='" . $je["id"] . "' name='delete' />\n";
-                                    echo "<input type='hidden' value='" . $erl["id"] . "' name='delete' />\n";
-                                    echo "<input type='submit' class='button delete journal entry' value='Delete' />\n";
-                                    echo "</form>";
-                                    echo "</article>";
+                                echo "<article>";
+                                echo "<h2><a href='detail.php?id=" . $je["id"] . "'>" . $je["title"] . "</a></h2>";
+                                echo "<time datetime=" . $je["date"] . ">" . date('F d, Y', strtotime($je["date"])) . "</time>";
+                                foreach(get_tags_for_entry($je["id"]) as $tag) {
+                                    echo "<p><a href='detail.php?id=" . $je["id"] . "'>" . $tag["tags"] . "</p></li>";
                                 }
+                                echo "<form method='post' action='index.php'>";
+                                echo "<input type='hidden' value='" . $je["id"] . "' name='delete' />\n";
+                                echo "<input type='submit' class='button delete journal entry' value='Delete' />\n";
+                                echo "</form>";
+                                echo "</article>";
                           }
                           ?>
                   </div>
