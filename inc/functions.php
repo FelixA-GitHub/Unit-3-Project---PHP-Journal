@@ -64,6 +64,27 @@ function get_tags_for_entry($id) {
     return $tags;
   }
 
+  // get all entries for a tag
+  function get_entries_for_tag($id) {
+      include("connection.php");
+      try {
+        $results = $db->prepare(
+            "SELECT * FROM entries
+            JOIN end_result ON entries.id = end_result.id
+            JOIN tag_list ON end_result.tag_id = tag_list.tag_id
+            WHERE tag_list.tag_id = ?
+            GROUP BY entries.title"
+        );
+        $results->bindParam(1,$id,PDO::PARAM_INT);
+        $results->execute();
+      } catch (Exception $e) {
+        echo "bad query";
+        echo $e->getMessage();
+      }
+      $entries = $results->fetchAll(PDO::FETCH_ASSOC);
+      return $entries;
+    }
+
 //Pull intersected entries and list on index page
 function get_intersect_list(){
     include ('connection.php');

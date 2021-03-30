@@ -49,7 +49,13 @@ if (isset($_GET['msg'])) {
                                 echo "<h2><a href='detail.php?id=" . $je["id"] . "'>" . $je["title"] . "</a></h2>";
                                 echo "<time datetime=" . $je["date"] . ">" . date('F d, Y', strtotime($je["date"])) . "</time>";
                                 foreach(get_tags_for_entry($je["id"]) as $tag) {
-                                    echo "<p><a href='detail.php?id=" . $je["id"] . "'>" . $tag["tags"] . "</p></li>";
+                                    echo "<article>";
+                                    echo "<p><a href='detail2.php?id=" . $je["id"] . "'>" . $tag["tags"] . "</p></li>";
+                                    echo "<form method='post' action='index.php'>";
+                                    echo "<input type='hidden' value='" . $je["id"] . "' name='delete' />\n";
+                                    echo "</form>";
+                                    echo "</article>";
+
                                 }
                                 echo "<form method='post' action='index.php'>";
                                 echo "<input type='hidden' value='" . $je["id"] . "' name='delete' />\n";
